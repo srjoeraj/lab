@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: repeat-recreate
+  name: repeat-recreate
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: repeat-recreate
+  template:
+    metadata:
+      labels:
+        app: repeat-recreate
+    spec:
+      containers:
+      - image: httpd:2.4.57-bookworm
+        name: httpd
+  
+  strategy:
+    type: Recreate
+    
+

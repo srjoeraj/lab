@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: repeat-rolling
+  name: repeat-rolling
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: repeat-rolling
+  template:
+    metadata:
+      labels:
+        app: repeat-rolling
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1
+
+
+
