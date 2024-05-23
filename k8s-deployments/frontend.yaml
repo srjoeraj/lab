@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend-deploy
+  name: frontend-deploy
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: frontend-deploy
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: frontend-deploy
+    spec:
+      containers:
+      - image: httpd:2.4.57-bookworm
+        name: httpd-new
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+
