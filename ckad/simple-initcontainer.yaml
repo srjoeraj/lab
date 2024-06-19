@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-init-demo
+spec:
+  containers:
+  - name: nginx-execute-after-init-container
+    image: nginx
+
+
+  initContainers:
+  - name: install
+    image: busybox-initconainer
+    command:
+    - sleep
+    - "3600"
+
