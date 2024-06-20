@@ -1,0 +1,12 @@
+
+### This file is created by Sander van Vugt (github.com/sandervanvugt). as part of his CKAD course.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxsecure
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - image: nginx
+    name: nginx
