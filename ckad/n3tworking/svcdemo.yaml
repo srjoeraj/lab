@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-06-22T11:56:41Z"
+  labels:
+    app: svcdemo
+  name: svcdemo
+  namespace: default
+  resourceVersion: "74379"
+  uid: dc3bae97-5a40-4a91-b824-7515a77c064a
+spec:
+  clusterIP: 10.105.191.194
+  clusterIPs:
+  - 10.105.191.194
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32000
+  selector:
+    app: svcdemo
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
