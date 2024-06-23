@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: testingingress
+  name: testingingress
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: testingingress
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: testingingress
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+
+
+---
+
+status: {}
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: testingingress
+  name: testingingress
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32010
+  selector:
+    app: testingingress
+  type: NodePort
+status:
+  loadBalancer: {}
