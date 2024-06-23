@@ -1,0 +1,55 @@
+### Copied from https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
+### edited to meet requirements
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lab10-pv-claim	
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab10httpd
+spec:
+  volumes:
+    - name: lab10-storage
+      persistentVolumeClaim:
+        claimName: lab10-pv-claim
+  containers:
+    - name: task-pv-container
+      image: httpd
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/var/www/html"
+          name: lab10-storage
+
