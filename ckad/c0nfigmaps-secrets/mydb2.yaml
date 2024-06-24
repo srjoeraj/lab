@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mydb
+  name: mydb
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mydb
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mydb
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_ROOT_PASSWORD
+              name: mydbvars
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_USER
+              name: mydbvars
+        image: mariadb
+        imagePullPolicy: Always
+        name: mariadb
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
