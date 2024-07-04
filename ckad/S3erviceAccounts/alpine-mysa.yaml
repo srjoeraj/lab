@@ -3,13 +3,17 @@ kind: Pod
 metadata:
   creationTimestamp: null
   labels:
-    run: alpine-pod
-  name: alpine-pod
+    run: alpine-mysa
+  name: alpine-mysa
 spec:
+  serviceAccount: mysa
   containers:
   - args:
     - sleep
     - "3600"
     image: alpine:3.9
-    name: alpine-pod
+    name: alpine-mysa
     resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
