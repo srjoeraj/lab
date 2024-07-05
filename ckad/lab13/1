@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: init-deploy
+  name: init-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: init-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: init-deploy
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+	volumeMounts:
+	- name: index-html
+	  mountPath: /usr/share/html/
+      volumes:
+	- name: index-html
+	  configMap:
+	    name: older-index
+        resources: {}
+status: {}

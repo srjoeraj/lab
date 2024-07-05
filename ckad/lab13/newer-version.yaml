@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: newer-version
+    type: cy
+  name: newer-version
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: newer-version
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: newer-version
+        type: cy
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        volumeMounts:
+        - name: index-html
+          mountPath: /usr/share/nginx/html/
+      volumes:
+        - name: index-html
+          configMap:
+            name: newer-index
