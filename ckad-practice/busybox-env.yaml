@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: busybox-env
+  name: busybox-env
+  namespace: mynamespace
+spec:
+  containers:
+  - args:
+    - env
+    image: busybox
+    name: busybox-env
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
