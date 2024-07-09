@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bpod
+  name: bpod
+spec:
+  containers:
+  - args:
+    - sleep
+    - "3600"
+    image: busybox
+    name: bpod2
+
+    volumeMounts:
+    - name: foo-storage 
+      mountPath: /etc/foo
+    resources: {}
+
+  - args:
+    - sleep
+    - "3600"
+    image: busybox
+    name: bpod1
+    resources: {}
+    
+    volumeMounts:
+    - name: foo-storage 
+      mountPath: /etc/foo
+
+
+  volumes:
+  - name: foo-storage
+    emptyDir: {}
+
+
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

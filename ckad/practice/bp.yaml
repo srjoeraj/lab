@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bp
+  name: bp
+spec:
+  volumes:
+  - name: foo
+    persistentVolumeClaim:
+      claimName: mypvc
+  containers:
+  - args:
+    - sleep
+    - "3600"
+    image: nginx
+    name: bp
+    resources: {}
+    volumeMounts:
+    - mountPath: /etc/foo
+        name: foo
+
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

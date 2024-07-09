@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bprob
+  name: bprob
+spec:
+  containers:
+  - image: nginx
+    name: bprob
+    resources: {}
+    livenessProbe:
+      exec:
+        command:
+        - ls 
+      initialDelaySeconds: 5
+      periodSeconds: 5
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+

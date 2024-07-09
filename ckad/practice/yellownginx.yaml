@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: yellownginx
+    version: v2
+    type: canary
+  name: yellownginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yellownginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: yellownginx
+        type: canary
+        version: v2
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
